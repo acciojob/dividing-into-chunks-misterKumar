@@ -35,7 +35,7 @@ for(let i=0;i<arr.length;i++){
 	}
 	else{
 		result.push(sub);
-		sub.push(arr[i]);
+		sub=[arr[i]];
 	}
   }
 if (sub.length > 0) {
