@@ -26,23 +26,30 @@ const n = prompt("Enter n: ");
 alert(JSON.stringify(divide(arr, n)));*/
 const arr = [1, 2, 3, 4, 1, 0, 2, 2];
 const divide = (arr, n) => {
+    let chunks = [];
+    let chunk = [];
+    let sum = 0;
 
-const result=[];
-let sub=[];
-for(let i=0;i<arr.length;i++){
-	if(sub.reduce((acc,val)=> acc+val,0)+arr[i]<= n){
-		sub.push(arr[i]);
-	}
-	else{
-		result.push(sub);
-		sub=[arr[i]];
-	}
-  }
-if (sub.length > 0) {
-result.push(sub);
+    for (let i = 0; i < arr.length; i++) {
+        if (sum + arr[i] > n) {
+            // start a new chunk
+            chunks.push(chunk);
+            chunk = [arr[i]];
+            sum = arr[i];
+        } else {
+            // add to the current chunk
+            chunk.push(arr[i]);
+            sum += arr[i];
+        }
+    }
+
+    // add the last chunk
+    if (chunk.length > 0) {
+        chunks.push(chunk);
+    }
+
+    return chunks;
 }
 
-return result;
-};
 const n = prompt("Enter n: ");
 alert(JSON.stringify(divide(arr, n)));
